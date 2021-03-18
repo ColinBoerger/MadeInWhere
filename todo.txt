@@ -1,0 +1,7 @@
+TODO:
+
+1. Made a regex expression to look for if a product is made in china.
+2. Make a proper pop up box for the alert with accurate info. 
+3. Look for things like made in america/USA
+4. Add brands that manufacture in China. 
+5. Make a button that predicts probability product is made in china.
