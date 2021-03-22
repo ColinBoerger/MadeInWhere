@@ -1,17 +1,32 @@
+function checkText(text){
+    var madeInChinaWords = ["China", "made in china", "chinese","chrome"];
+    var madeInChinaCompanies = ["alibaba"];
+    for(let i = 0; i < madeInChinaWords.length; i++){
+        let word = madeInChinaWords[i];
+        if(text.match(word)){
+            return true;
+        }
+    }
+}
+
+function test_main(){
 var queue = [document.body];
 var word = "China";
 while(curr = queue.pop()){
-    if(!curr.textContent.match(word)){
-        continue;
+    if(checkText(curr.textContent)){
+        //alert("Product potentially made in china");
+        console.log(curr.textContent);
+        break;
     }
     for (var i = 0; i < curr.childNodes.length; ++i) {
-        console.log("Here")
         switch (curr.childNodes[i].nodeType) {
             case Node.TEXT_NODE : // 3
-                if (curr.childNodes[i].textContent.match(word)) {
-                    alert("Product potentially Made in China");
+                if (checkText(curr.childNodes[i].textContent)) {
+                    //alert("Product potentially Made in China");
+                    console.log(curr.childNodes[i].textContent);
                     console.log(curr);
-                    return;
+
+                    break;
                     //TODO Insert logic to search for where a product is made
                     // you might want to end your search here.
                 }
@@ -22,3 +37,11 @@ while(curr = queue.pop()){
         }
     }
 }
+}
+
+chrome.runtime.onMessage.addListener(
+    function(message, sender, sendResponse) {
+        test_main();
+            sendResponse({data:"1", method: "test_main"}); //same as innerText
+    }
+);
