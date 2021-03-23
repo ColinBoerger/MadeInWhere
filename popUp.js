@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
         	chrome.tabs.executeScript(tab[0].id, {file: "content.js"}, function(){
         		chrome.tabs.sendMessage(tab[0].id, {type: "test_main"}, function(response) {
         	        console.log(response);
-        	        alert(response);		 
+        	        document.getElementById('Results').innerHTML = response.results;		 
             	});		        		
     		});
         });
